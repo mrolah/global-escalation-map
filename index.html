@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>USA – Negative Scenario | Optimized Adaptive Strategic Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="hud">
+  <b>USA – NEGATIVE SCENARIO <span class="tag">HYPOTHETICAL</span></b>
+  <div class="sub">Optimized adaptive strategic map • stable panning • consistent symbology across phases • zoom in to reveal more detail</div>
+</div>
+
+<div class="sidebar">
+  <h3>Current phase</h3>
+  <div id="eventList"></div>
+</div>
+
+<div class="zoomNotice">
+  <b>ZOOM IN TO SEE DETAILS</b><br>
+  Overview mode keeps the map clean. Additional symbols, labels, and operational details appear as you zoom in.<br><span style="display:block;margin-top:6px;color:#b9cad5">Scenario model: opportunistic multi-front escalation, not a unified four-state command.</span>
+</div>
+
+<div class="controls">
+  <div id="stepLabel">Step 1 • Initial pressure across multiple regions</div>
+  <div style="margin-top:8px">
+    <button id="prev" title="Go to the previous scenario step">← Back</button>
+    <button id="next" title="Go to the next scenario step">Next →</button>
+  </div>
+  <div class="stepbar" id="stepbar"></div>
+  <div class="small" style="margin-top:8px">
+    Controls: <b>Back / Next</b> changes the scenario phase. Mouse wheel zooms the map one level at a time. Overview keeps only animated routes and compact clickable endpoints; Mid/Full Detail progressively adds labels, zones, and symbols.
+  </div>
+  <div class="mode" id="detailModeBox">Display mode: Overview</div>
+</div>
+
+<div class="legend">
+  <div style="font-weight:900;margin-bottom:6px">Legend</div>
+  <div class="legend-row"><span class="line" style="background:#ff3b30"></span> military / strategic pressure</div>
+  <div class="legend-row"><span class="line" style="background:#ff9f0a"></span> proxy / indirect pressure</div>
+  <div class="legend-row"><span class="line" style="background:#64d2ff"></span> US / allied movement</div>
+  <div class="legend-row"><span class="dot-sample"></span> animated route marker</div>
+</div>
+
+<div class="hint">Overview: animated routes + endpoints • zoom in to see details</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="scenario-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
