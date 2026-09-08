@@ -1,0 +1,139 @@
+html,body,#map{height:100%;margin:0}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#07131f;color:#fff;overflow:hidden}
+.leaflet-container{background:#081723}
+
+/* UI */
+.hud,.controls,.sidebar,.legend{
+  position:absolute;z-index:1000;background:rgba(5,18,30,.94);
+  border:1px solid rgba(255,255,255,.16);border-radius:14px;
+  box-shadow:0 12px 34px rgba(0,0,0,.35);backdrop-filter:blur(6px)
+}
+.hud{top:14px;left:16px;right:16px;padding:13px 16px}
+.hud b{font-size:21px;letter-spacing:.2px}
+.hud .sub{font-size:12px;color:#c7d6e1;margin-top:4px}
+.tag{background:#8d1717;border-radius:6px;padding:3px 7px;font-size:11px;margin-left:8px}
+.controls{left:16px;bottom:16px;width:430px;padding:12px 14px}
+.sidebar{right:16px;top:104px;width:400px;padding:12px 14px;max-height:58vh;overflow:auto}
+.legend{right:16px;bottom:16px;padding:10px 12px;min-width:250px}
+button{
+  background:#1d405b;color:#fff;border:0;border-radius:8px;
+  padding:8px 11px;font-weight:800;cursor:pointer;margin-right:6px
+}
+button:hover{background:#28516e}
+.small{font-size:11px;color:#a9bac7;line-height:1.35}
+#stepLabel{font-size:13px;font-weight:900}
+.stepbar{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.stepdot{
+  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#19354c;border:1px solid rgba(255,255,255,.18);font-size:11px;font-weight:800;cursor:pointer
+}
+.stepdot.active{background:#64d2ff;color:#00131e}
+h3{margin:0 0 8px;font-size:14px}
+.event{
+  padding:8px 9px;border-radius:9px;background:rgba(255,255,255,.045);
+  margin:7px 0;border-left:3px solid #6aa7d7;font-size:12px;line-height:1.35
+}
+.event.hot{border-left-color:#ff3b30}
+.event.mid{border-left-color:#ff9f0a}
+.event.cool{border-left-color:#64d2ff}
+.legend-row{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:11px}
+.line{width:27px;height:5px;border-radius:4px}
+.dot-sample{width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff}
+.mode{
+  margin-top:8px;padding:7px 9px;border-radius:8px;background:rgba(255,255,255,.05);
+  font-size:11px;color:#d9e6ee
+}
+.hint{
+ position:absolute;z-index:1000;left:50%;transform:translateX(-50%);
+ bottom:130px;background:rgba(5,18,30,.92);border:1px solid rgba(255,255,255,.16);
+ border-radius:12px;padding:8px 12px;font-size:12px;color:#d9e6ee
+}
+
+.zoomNotice{
+ position:absolute;z-index:1000;top:104px;left:16px;
+ background:rgba(7,25,40,.96);
+ border:1px solid rgba(255,255,255,.20);
+ border-left:5px solid #64d2ff;
+ border-radius:14px;
+ padding:10px 12px;
+ max-width:320px;
+ box-shadow:0 12px 34px rgba(0,0,0,.35);
+ backdrop-filter:blur(6px);
+ font-size:12px;
+ line-height:1.35;
+ color:#e7f2fa
+}
+.zoomNotice b{
+ display:block;
+ font-size:13px;
+ letter-spacing:.3px;
+ margin-bottom:2px
+}
+
+/* Symbols */
+.pulse{
+ border-radius:50%;background:#ffd43b;border:2px solid #fff;
+ animation:pulse 1.7s infinite;box-shadow:0 0 18px rgba(255,212,59,.6)
+}
+@keyframes pulse{
+ 0%{box-shadow:0 0 0 0 rgba(255,212,59,.75)}
+ 70%{box-shadow:0 0 0 18px rgba(255,212,59,0)}
+ 100%{box-shadow:0 0 0 0 rgba(255,212,59,0)}
+}
+.spread{
+ border-radius:50%;border:3px solid #ff3b30;
+ animation:spread 3s infinite;box-sizing:border-box
+}
+@keyframes spread{
+ 0%{transform:scale(.45);opacity:.85}
+ 100%{transform:scale(3);opacity:0}
+}
+.flow{
+ border-radius:50%;background:#fff;
+ box-shadow:0 0 8px #fff,0 0 16px #ff3b30
+}
+.asset{
+ border-radius:50%;background:#0c2232;border:1px solid rgba(255,255,255,.5);
+ display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(0,0,0,.6)
+}
+.lab{
+ background:rgba(5,18,30,.84);border:1px solid rgba(255,255,255,.18);
+ border-radius:7px;padding:4px 7px;font-size:12px;font-weight:900;white-space:nowrap;
+ box-shadow:0 5px 14px rgba(0,0,0,.28)
+}
+.micro-label{
+ background:rgba(5,18,30,.88);border:1px solid rgba(255,255,255,.18);
+ border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap;
+ box-shadow:0 4px 10px rgba(0,0,0,.3)
+}
+
+/* SVG route animation: browser/CSS handles dash movement, not JS setStyle every frame. */
+.route-flow{
+  animation:dashFlow 1.15s linear infinite;
+  pointer-events:none;
+}
+@keyframes dashFlow{
+  from{stroke-dashoffset:0}
+  to{stroke-dashoffset:-36}
+}
+
+/* Make main route clickable without making it visually thick. */
+.route-hit{
+  stroke:rgba(255,255,255,0.001);
+  stroke-width:14px;
+  fill:none;
+  pointer-events:stroke;
+}
+
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#0d2232;color:#fff}
+.leaflet-popup-content{font-size:12px;margin:12px 14px}
+
+@media(max-width:940px){
+ .hud{left:10px;right:10px;top:10px}
+ .hud b{font-size:16px}
+ .legend{display:none}
+ .zoomNotice{left:10px;right:10px;top:92px;max-width:none}
+ .sidebar{right:10px;left:10px;top:172px;width:auto;max-height:22vh}
+ .controls{left:10px;right:10px;width:auto;bottom:10px}
+ .hint{bottom:100px;left:10px;right:10px;transform:none}
+}
